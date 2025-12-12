@@ -1,7 +1,7 @@
 package com.temp.backend.global.exception.dto;
 
+import com.temp.backend.global.code.ErrorCode;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 @Getter
 public class ErrorResponse {
@@ -9,8 +9,8 @@ public class ErrorResponse {
     private final int code;
     private final String message;
 
-    public ErrorResponse(HttpStatus status, String message) {
-        this.code = status.value();
-        this.message = message;
+    public ErrorResponse(ErrorCode errorCode) {
+        this.code = errorCode.getStatus().value();
+        this.message = errorCode.getMessage();
     }
 }

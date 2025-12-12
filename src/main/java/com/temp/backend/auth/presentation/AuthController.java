@@ -5,6 +5,7 @@ import com.temp.backend.auth.dto.AuthenticationRequest;
 import com.temp.backend.auth.dto.AuthenticationResponse;
 import com.temp.backend.auth.dto.RegisterRequest;
 import com.temp.backend.auth.dto.RegisterResponse;
+import com.temp.backend.global.code.SuccessCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +25,7 @@ public class AuthController {
             @RequestBody RegisterRequest request
     ) {
         String jwtToken = authService.register(request);
-        return ResponseEntity.ok(RegisterResponse.of(jwtToken, "회원가입이 성공적으로 완료되었습니다."));
+        return ResponseEntity.ok(RegisterResponse.of(jwtToken, SuccessCode.REGISTER_SUCCESS.getMessage()));
     }
 
     @PostMapping("/authenticate")
@@ -32,6 +33,6 @@ public class AuthController {
             @RequestBody AuthenticationRequest request
     ) {
         String jwtToken = authService.authenticate(request);
-        return ResponseEntity.ok(AuthenticationResponse.of(jwtToken, "로그인이 성공적으로 완료되었습니다."));
+        return ResponseEntity.ok(AuthenticationResponse.of(jwtToken, SuccessCode.LOGIN_SUCCESS.getMessage()));
     }
 }
